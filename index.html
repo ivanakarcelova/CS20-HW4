@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Joe's Hotdog Stand</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;900&family=Philosopher&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="title" id="titleBox">
+		<h1 class="title1">JOE'S 🌭</h1>
+		<h1 class="title2">Hotdog Stand.</h1>
+	</div>
+
+	<div class="order" id="orderBox">
+		<h2 class="order-title">Order Preview 📒</h2>
+		<h3 id="hdOrdered"> Hotdog(s) ordered: </h3>
+		<h3 id="ffOrdered"> French Fries ordered: </h3>
+		<h3 id="drinksOrdered"> Drinks ordered: </h3>
+	</div>
+
+	<div class="menu" id="menuBox">
+		<h2 class="menu-title">Menu 🍴</h2>
+		<h3> Hotdog: $3.75 (each) </h3>
+		<h3> French Fries: $2.00 </h3>
+		<h3> Drinks: $1.80 (each) </h3>
+	</div>
+
+	<div class="bill" id="billBox">
+		<h2 class="bill-title">Bill 💸</h2>
+		<h3 id="subtotal"> Subtotal : </h3>
+		<h3 id="discount"> Discount Recieved? :  </h3>
+		<h3 id="tax"> Tax : </h3>
+		<h3 id= "total"> Total : </h3>
+	</div>
+	å
+	<script language="javascript">
+		//1. get quantity. ------
+		var hotdogs = prompt("Add this many hotdogs to my order: ", );
+		var frenchFries = prompt("Add this many fries to my order: ", );
+		var drinks = prompt("Add this many drinks to my order: ", );
+
+		document.getElementById("hdOrdered").innerHTML = "Hotdog(s) ordered: " + hotdogs;
+		document.getElementById("ffOrdered").innerHTML = "French Fries ordered: " + frenchFries;
+		document.getElementById("drinksOrdered").innerHTML = "Drinks ordered: " + drinks;
+
+		//2. caluclate subtotal --------
+		var subtotal = hotdogs * 3.75 + frenchFries * 2.00 + drinks * 1.80
+		var newSubtotal = Math.round(subtotal * 100)/100;
+		document.getElementById("subtotal").innerHTML = "Subtotal: $" + newSubtotal.toFixed(2);
+
+		//3. applicable discount -------
+		if (subtotal >= 20.00) {
+			var discount = subtotal * .10;
+			roundedDiscount = Math.round (discount * 100)/100;
+			document.getElementById("discount").innerHTML = "Discount recieved? Yes, $ " + roundedDiscount.toFixed(2);
+
+			discount_subtotal = Math.round((newSubtotal - discount)*100)/100;
+			discount_tax = discount_subtotal * 1.0625;
+
+			discount_taxRounded = Math.round(discount_tax * 100)/100;
+			discount_totalTaxRounded = Math.round(discount_subtotal * 100)/100;
+
+			document.getElementById("tax").innerHTML = "Tax: $" + discount_taxRounded.toFixed(2);
+			document.getElementById("total").innerHTML = "Total (with tax): $" + discount_totalTaxRounded.toFixed(2);
+		}
+		else {
+			//4. add Mass tax
+			tax = subtotal * 0.0625;
+			subtotal= subtotal * 1.0625;
+
+			taxRounded = Math.round(tax * 100)/100;
+			totalTaxRounded = Math.round(subtotal * 100)/100;
+
+			document.getElementById("discount").innerHTML = "Discount recieved? No :(";
+			document.getElementById("tax").innerHTML = "Tax: $" + taxRounded.toFixed(2);
+			document.getElementById("total").innerHTML = "Total (with tax): $" + totalTaxRounded.toFixed(2);
+		}
+
+	</script>
+
+</body>
